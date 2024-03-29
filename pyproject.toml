@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "running-line"
+version = "0.1.0"
+description = "Creating video with running line. Using django to generate it by request."
+authors = ["Vlad <vladpzuykinvc@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+moviepy = "^1.0.3"
+pillow = "9.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
