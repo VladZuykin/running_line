@@ -1,0 +1,8 @@
+/venv
+.env
+/.idea
+
+conf.py
+db.sqlite3
+running_line.mp4
+*.log

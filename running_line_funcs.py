@@ -1,3 +1,5 @@
+import os
+
 import moviepy.editor as mpy
 import numpy as np
 from typing import Tuple
@@ -52,9 +54,16 @@ def horizontal_outer_scroll(clip, x_speed, width=None,
 
 
 def generate_running_line(text: str, duration: float, res: Tuple[int, int] = (100, 100), fontsize=40,
-                          font="Arial", textcolor="white", bg_color=(0, 0, 0)):
+                          font=None, textcolor="white", bg_color=(0, 0, 0)):
     bg_color = np.array(bg_color)
-    text_clip: mpy.TextClip = mpy.TextClip(text, fontsize=fontsize, color=textcolor, font=font).set_duration(duration)
+    if os.name == "nt":
+        font = "Arial"
+    else:
+        font = "Vollkorn-Bold"
+
+    text_clip: mpy.TextClip = mpy.TextClip(
+        text, fontsize=fontsize, color=textcolor, font=font).set_duration(duration)
+
     width = res[0]
     scrolled_text_clip = horizontal_outer_scroll(text_clip,
                                                  width=width,
