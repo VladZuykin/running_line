@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.http import HttpResponse, FileResponse, HttpResponseBadRequest
 from django.shortcuts import render
 
-from main import generate_running_line
+from running_line_funcs import generate_running_line
 from .models import RunningLineRequest
 
 
