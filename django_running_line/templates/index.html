@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Бегущая строка</title>
+</head>
+<body>
+<span style="font-weight: bold; font-size: 20px;"> Последние 5 запросов: </span>
+
+<ol>
+    {% for object in objects %}
+    <li style="font-size: 18px;">
+        {{ object.text }}
+    </li>
+    {% endfor %}
+</ol>
+
+</body>
+</html>
