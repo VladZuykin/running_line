@@ -1,5 +1,4 @@
 import moviepy.editor as mpy
-import moviepy.video.fx.all as vfx
 import numpy as np
 from typing import Tuple
 
@@ -53,7 +52,7 @@ def horizontal_outer_scroll(clip, x_speed, width=None,
 
 
 def generate_running_line(text: str, duration: float, res: Tuple[int, int] = (100, 100), fontsize=40,
-                          font="Arial", textcolor="white", bg_color=(0, 255, 0)):
+                          font="Arial", textcolor="white", bg_color=(0, 0, 0)):
     bg_color = np.array(bg_color)
     text_clip: mpy.TextClip = mpy.TextClip(text, fontsize=fontsize, color=textcolor, font=font).set_duration(duration)
     width = res[0]
