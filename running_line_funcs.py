@@ -8,14 +8,16 @@ from moviepy.video.compositing.CompositeVideoClip import CompositeVideoClip
 
 
 def horizontal_outer_scroll(clip, x_speed, width=None,
-                            x_start=0, bg_color=(0, 0, 0), apply_to="mask"):
-    bg_color = np.array(bg_color)
+                            x_start=0, apply_to="mask"):
+    bg_color = (0, 0, 0)
     # width - ширина "окна", которое "движется" по клипу с текстом.
     if width is None:
         width = clip.w
     # Увеличиваю клип с текстом на случай, если он будет меньше, чем ширина экрана.
     elif width > clip.w:
-        surface_clip: mpy.ColorClip = mpy.ColorClip(size=(width, clip.size[1]), color=bg_color, duration=clip.duration)
+        surface_clip: mpy.ColorClip = mpy.ColorClip(size=(width, clip.size[1]),
+                                                    color=bg_color,
+                                                    duration=clip.duration)
         clip = CompositeVideoClip([surface_clip, clip.set_position("left", "center")], size=(width, clip.size[1]))
 
     def f(get_frame, t):
@@ -54,22 +56,23 @@ def horizontal_outer_scroll(clip, x_speed, width=None,
 
 
 def generate_running_line(text: str, duration: float, res: Tuple[int, int] = (100, 100), fontsize=40,
-                          font=None, textcolor="white", bg_color=(0, 0, 0)):
-    bg_color = np.array(bg_color)
-    if os.name == "nt":
-        font = "Arial"
-    else:
-        font = "Vollkorn-Bold"
+                          font=None, bg_color=(0, 0, 0)):
+    text_color = "white"
+    if font is None:
+        if os.name == "nt":
+            font = "Arial"
+        else:
+            font = "Vollkorn-Bold"
 
     text_clip: mpy.TextClip = mpy.TextClip(
-        text, fontsize=fontsize, color=textcolor, font=font).set_duration(duration)
+        text, fontsize=fontsize, color=text_color, font=font).set_duration(duration)
 
     width = res[0]
     scrolled_text_clip = horizontal_outer_scroll(text_clip,
                                                  width=width,
                                                  x_start=-res[1],
                                                  x_speed=(text_clip.w + width) / duration)
-    surface_clip: mpy.ColorClip = mpy.ColorClip(size=res, color=bg_color, duration=duration)
+    surface_clip: mpy.ColorClip = mpy.ColorClip(size=res, duration=duration, color=bg_color)
     res_clip = CompositeVideoClip([surface_clip, scrolled_text_clip.set_position("center")], size=res)
     return res_clip
 

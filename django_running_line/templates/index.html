@@ -13,9 +13,21 @@
 <ol>
     {% for object in objects %}
     <li style="font-size: 18px;">
-        {{ object.text }}
+        Текст: {{ object.text }}. Длительность: {{ object.duration }}. Разрешение: ({{ object.width }},
+        {{object.height}}). Размер шрифта: {{ object.fontsize }}. Кадров в секунду: {{ object.fps }}.
     </li>
     {% endfor %}
+</ol>
+
+<span style="font-weight: bold; font-size: 20px;">Информация</span>
+<ol>
+    <li style="font-size: 18px;">Последние 5 текстов запросов можно увидеть в <span
+            style="font-weight: bold;">"/"</span> или <span style="font-weight: bold;">/index/"</span>.
+    </li>
+    <li style="font-size: 18px;">Сам запрос выполняется следующим образом: <span style="font-weight: bold;">/running_line/?text=[текст]</span>.
+    </li>
+    <li style="font-size: 18px;">Также есть параметры <span style="font-weight: bold;">duration, width, height, fontsize, fps</span>.
+    </li>
 </ol>
 
 </body>
